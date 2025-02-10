@@ -14,6 +14,7 @@ This README describes the project structure, key components, and how everything 
 
 ## File Structure
 
+```
 rockfin-gov
 ├── README.md                 # Project documentation
 ├── config.yaml               # Global configuration file
@@ -37,4 +38,4 @@ rockfin-gov
 │       └── opportunities.go
 └── test                      # Test files (unit/integration)
     └── aggregator_test.go
-
+```
