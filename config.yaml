@@ -1,0 +1,40 @@
+samgov:
+  api_keys:
+    - uC1KwxGFc3nlHndmQSyJ7J1gcelCUGL9nLLkPxLe
+    - ZOc9JjDzz3G6QvDNLv9j2kvFvdi5wKMfqCqEl3Bl
+    - kHpIxBtQIslpgvyRqoOa0DsHqkJurpN9TSH9P5V6
+    - GnbsRQWcxFvd6wm1dU1JVu2q76ph3N6lwyQethSf
+    - XUA0IJB2llUi6crUJiO54O9OmJqv78skcKLd6V9l
+    - 2O8Gc5yfLnWIqgS6wXwZ5LT5F3HEWR5guEGQTWdz
+    - Ax4uTcFE5GU57gLMqNKoxwRu3dqb8Yya2FppD5gl
+    - bfEvCtsOXxHj5O4Lq5f2GrOg3oSmLZVmofFwdig4
+    - atIA1jsme8C6qPFeN26NQEc2LWHMKSaA2uMegfnm
+    - XfHsL4rpAsCPJozoQzQKhMr6Div8SNplAhnYAmVd
+    - nv0fIkXTy3IjHhtJAahGXxnnWmnVotx74pPkzmxS
+    - UtYxdEgYAOpIakF4ioOiXhbmEiJAwesqYLJT27I9
+    - vVYvsmoWvyMtAQ3D3EiInXlUsObcJybMJ6e2FYdU
+    - Cv9bqJDhs21d3lXnrWPuLHUESABRTJSKHo9gnW2v
+    - F49gxCVBXbRVm9qAJN9C1CIh4DBfkq9XxI0l6zkO
+    - jzQKhQfo8LkR7yJrFI8oQhuXOYBvFhwNiziV5C0t
+    - hhlrFkGeHCNEnsPxEwlybQXDgUMTXv3YbzHtKVVZ
+    - ikoDCnOixOedyApDJyULzv9Dn5dWovCeBOgJrqah
+    - jQbgM6Xlt3kCgtbY7wRTCDcLcK8rmWdcQ6I7Ro17
+    - PhT8boOmADLdsEZmsQSUcuF4fShxaI3B7rA1cgty
+    - 35QXLiQroxyN2kdrrqarTSLFY4LTfd21qYXpCToB
+    - URysJhrDIe4vEkbOZjVqxK6eLCdoDXiU6M9aBg9d
+    - pbpYXtmmGzcEsqi9YeZTCIKCjGLfmI2hUMbEAiMc
+    - KFZHuGYr7lpbr3q74ilsrU1IcYIljripvTEEqj4k
+    - r9g3UAQa2L6WGjhXmQJz4beAZVQDMYsmDdATZLn0
+    - ZXukaQbsKLGGW9LmEnL3z1f5zU4JZdhDhd5TYd7C
+    - ZwJlXOpfxX2W2kDVAYz5KjJtphlsluImEV1LUyuA
+    - M42RdcjBiMl2AE0563qMI6fIgiLdGzipVvO3efvH]
+    - 1QqzvhcSoo1r2Bf7qDb7AWaq4y0kqK9uc1C5HUrP
+    - wlHgyq0FpJU2VNErU0e1xYw7pvQqR8HAlKRDJkgS
+    - pQEqE1GbwY4okhHTiXtOAIDtRrXroWa84aV2aUpb
+
+database:
+  host: beelink-3
+  port: 5432
+  name: samgov
+  user: postgres
+  password: postgres
