@@ -29,8 +29,8 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	PullCmd.PersistentFlags().Int("limit", 0, "Limit the number of records to pull") // Use PullCmd here
-	viper.BindPFlag("limit", PullCmd.PersistentFlags().Lookup("limit"))              // Use PullCmd here
+	PullCmd.PersistentFlags().Int("limit", 1000, "Limit the number of records to pull") // Use PullCmd here
+	viper.BindPFlag("limit", PullCmd.PersistentFlags().Lookup("limit"))                 // Use PullCmd here
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
