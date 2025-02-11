@@ -1,65 +1,56 @@
-//go:generate go build -o rockfin-gov
-
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
-	"rockfin-gov/internal/aggregator/federal"
+	"rockfin-gov/cmd/samgov"
+
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
+var rootCmd = &cobra.Command{
+	Use:   "rockfin-gov",
+	Short: "Rockfin Gov CLI",
+	Long:  `Rockfin Gov command line interface to fetch and process government opportunities data.`,
+}
+
+var samGovCmd = &cobra.Command{
+	Use:   "samgov",
+	Short: "Commands related to SAM.gov API",
+	Long:  `Provides commands to interact with the SAM.gov API for government opportunities.`,
+}
+
+var fetchCmd = &cobra.Command{
+	Use:   "fetch",
+	Short: "Fetch opportunities from SAM.gov API",
+	Long:  `Fetches government opportunities from the SAM.gov API and stores them in the database.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		limit, _ := cmd.Flags().GetInt("limit")
+		fmt.Println("Calling samgov API with limit:", limit) // Placeholder - remove actual API call logic
+	},
+}
+
+func initConfig() {
+	viper.SetConfigFile("config.yaml")
+	viper.SetConfigType("yaml")
+	viper.AutomaticEnv() // read in environment variables that match
+
+	// If a config file is found, read it in.
+	if err := viper.ReadInConfig(); err == nil {
+		// fmt.Println("Using config file:", viper.ConfigFileUsed())
+	}
+}
+
 func main() {
-	sourcesCmd := flag.NewFlagSet("sources", flag.ExitOnError)
-	samgovCmd := flag.NewFlagSet("samgov", flag.ExitOnError)
+	initConfig()
+	fetchCmd.Flags().IntP("limit", "l", 0, "Limit the number of records fetched")
+	samGovCmd.AddCommand(fetchCmd)
+	samGovCmd.AddCommand(samgov.PullCmd) // Add PullCmd from cmd/samgov/pull.go
+	rootCmd.AddCommand(samGovCmd)
 
-	pullCmd := flag.NewFlagSet("pull", flag.ExitOnError)
-	pullRawCmd := flag.NewFlagSet("pull-raw", flag.ExitOnError)
-
-	var limit int
-	var limitPullRaw int
-	pullCmd.IntVar(&limit, "limit", 0, "Limit the number of requests")
-	pullRawCmd.IntVar(&limitPullRaw, "limit", 5, "Limit the number of requests")
-
-	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage: %s [command] [subcommand] [options]\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "Commands:\n")
-		fmt.Fprintf(os.Stderr, "  rockfin-gov sources samgov pull [--limit=1000]\n")
-		fmt.Fprintf(os.Stderr, "  rockfin-gov sources samgov pull-raw [--limit=5]\n")
-		flag.PrintDefaults()
-	}
-
-	if len(os.Args) < 3 {
-		flag.Usage()
-		os.Exit(1)
-	}
-
-	switch os.Args[1] {
-	case "sources":
-		switch os.Args[2] {
-		case "samgov":
-			switch os.Args[3] {
-			case "pull":
-				pullCmd.Parse(os.Args[4:])
-				samgovCmd.Parse(os.Args[3:4])
-				sourcesCmd.Parse(os.Args[2:3])
-				federal.CallSamGovAPI(limit)
-			case "pull-raw":
-				pullRawCmd.Parse(os.Args[4:])
-				samgovCmd.Parse(os.Args[3:4])
-				sourcesCmd.Parse(os.Args[2:3])
-				rawJSON := federal.CallSamGovAPIWithLimit(limitPullRaw)
-				fmt.Println(rawJSON)
-			default:
-				flag.Usage()
-				os.Exit(1)
-			}
-		default:
-			flag.Usage()
-			os.Exit(1)
-		}
-	default:
-		flag.Usage()
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
 		os.Exit(1)
 	}
 }
