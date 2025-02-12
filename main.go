@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"rockfin-gov/cmd/samgov"
+	"rockfin-gov/cmd/aggregator"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -15,21 +15,7 @@ var rootCmd = &cobra.Command{
 	Long:  `Rockfin Gov command line interface to fetch and process government opportunities data.`,
 }
 
-var samGovCmd = &cobra.Command{
-	Use:   "samgov",
-	Short: "Commands related to SAM.gov API",
-	Long:  `Provides commands to interact with the SAM.gov API for government opportunities.`,
-}
-
-var fetchCmd = &cobra.Command{
-	Use:   "fetch",
-	Short: "Fetch opportunities from SAM.gov API",
-	Long:  `Fetches government opportunities from the SAM.gov API and stores them in the database.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		limit, _ := cmd.Flags().GetInt("limit")
-		fmt.Println("Calling samgov API with limit:", limit) // Placeholder - remove actual API call logic
-	},
-}
+var aggregatorCmd = aggregator.AggregatorCmd
 
 func initConfig() {
 	viper.SetConfigFile("config.yaml")
@@ -44,10 +30,10 @@ func initConfig() {
 
 func main() {
 	initConfig()
-	fetchCmd.Flags().IntP("limit", "l", 0, "Limit the number of records fetched")
-	samGovCmd.AddCommand(fetchCmd)
-	samGovCmd.AddCommand(samgov.PullCmd) // Add PullCmd from cmd/samgov/pull.go
-	rootCmd.AddCommand(samGovCmd)
+	// fetchCmd.Flags().IntP("limit", "l", 0, "Limit the number of records fetched")
+	// samGovCmd.AddCommand(fetchCmd)
+	// samGovCmd.AddCommand(samgov.SamgovCmd) // Add PullCmd from cmd/samgov/pull.go
+	rootCmd.AddCommand(aggregatorCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

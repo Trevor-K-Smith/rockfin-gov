@@ -24,7 +24,7 @@ using the samgovclient.`,
 }
 
 func init() {
-	SamgovCmd.AddCommand(PullCmd) // Use PullCmd here
+	SamgovCmd.AddCommand(PullCmd)
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports Persistent Flags which will work for this command
