@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"rockfin-gov/internal/aggregator/federal/samgov"
 
-	db "rockfin-gov/internal/database"
-
 	"github.com/spf13/cobra"
 )
 
@@ -25,11 +23,6 @@ using the samgovclient.`,
 			fmt.Println(data)
 		} else {
 			data = samgov.FetchOpportunities(limit, "", "")
-			if err := db.ConnectDB(); err != nil {
-				fmt.Println("Error connecting to database:", err) // Or handle differently
-			} else {
-				fmt.Println("Successfully connected to database")
-			}
 		}
 		return nil
 	},
