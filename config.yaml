@@ -34,7 +34,4 @@ samgov:
 
 database:
   host: beelink-3
-  port: 5432
-  name: samgov
-  user: postgres
-  password: postgres
+  port: 27017
