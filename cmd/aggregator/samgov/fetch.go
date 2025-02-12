@@ -1,9 +1,10 @@
 package samgov
 
 import (
-	"encoding/json"
 	"fmt"
 	"rockfin-gov/internal/aggregator/federal/samgov"
+
+	db "rockfin-gov/internal/database"
 
 	"github.com/spf13/cobra"
 )
@@ -18,24 +19,18 @@ using the samgovclient.`,
 		limit, _ := cmd.Flags().GetInt("limit")
 		raw, _ := cmd.Flags().GetBool("raw")
 
-		data := samgov.FetchOpportunities(limit, "", "")
-
+		var data string
 		if raw {
-			fmt.Println(data) // Print raw JSON response
-			return nil
+			data = samgov.FetchOpportunitiesRaw(limit, "", "")
+			fmt.Println(data)
+		} else {
+			data = samgov.FetchOpportunities(limit, "", "")
+			if err := db.ConnectDB(); err != nil {
+				fmt.Println("Error connecting to database:", err) // Or handle differently
+			} else {
+				fmt.Println("Successfully connected to database")
+			}
 		}
-
-		// Parse JSON and format it nicely
-		var prettyJSON map[string]interface{}
-		if err := json.Unmarshal([]byte(data), &prettyJSON); err != nil {
-			return fmt.Errorf("error parsing JSON: %v", err)
-		}
-
-		prettyData, err := json.MarshalIndent(prettyJSON, "", "  ")
-		if err != nil {
-			return fmt.Errorf("error formatting JSON: %v", err)
-		}
-		fmt.Println(string(prettyData))
 		return nil
 	},
 }

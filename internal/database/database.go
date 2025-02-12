@@ -18,19 +18,20 @@ type DBConfig struct {
 
 var DB *gorm.DB
 
-func ConnectDB() {
+func ConnectDB() error {
 	var config DBConfig
 	err := viper.UnmarshalKey("database", &config)
 	if err != nil {
-		panic(fmt.Sprintf("failed to decode database config: %v", err))
+		return fmt.Errorf("failed to decode database config: %v", err)
 	}
 
 	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		config.Host, config.Port, config.User, config.Password, config.Name)
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect to database")
+		return fmt.Errorf("failed to connect to database: %v", err)
 	}
 
 	fmt.Println("Successfully connected to database")
+	return nil
 }
