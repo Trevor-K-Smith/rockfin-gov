@@ -18,7 +18,7 @@ using the samgovclient.`,
 		limit, _ := cmd.Flags().GetInt("limit")
 		raw, _ := cmd.Flags().GetBool("raw")
 
-		data := samgov.CallSamGovAPI(limit, "", "")
+		data := samgov.FetchOpportunities(limit, "", "")
 
 		if raw {
 			fmt.Println(data) // Print raw JSON response

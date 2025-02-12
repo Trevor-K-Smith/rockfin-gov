@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func CallSamGovAPI(limit int, postedFrom, postedTo string) string {
+func FetchOpportunities(limit int, postedFrom, postedTo string) string {
 	now := time.Now()
 
 	// Default date range (-7 days to today)
