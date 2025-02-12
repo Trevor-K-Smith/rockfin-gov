@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"rockfin-gov/cmd/aggregator"
+	"rockfin-gov/cmd/database"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -34,6 +35,7 @@ func main() {
 	// samGovCmd.AddCommand(fetchCmd)
 	// samGovCmd.AddCommand(samgov.SamgovCmd) // Add PullCmd from cmd/samgov/pull.go
 	rootCmd.AddCommand(aggregatorCmd)
+	rootCmd.AddCommand(database.NewDatabaseCmd())
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

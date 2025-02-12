@@ -6,6 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	
+	"rockfin-gov/cmd/database"
 )
 
 var cfgFile string
@@ -42,6 +44,9 @@ func init() {
 	// will be global for your application.
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is ./config.yaml)")
+
+	// Add database commands
+	rootCmd.AddCommand(database.NewDatabaseCmd())
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
