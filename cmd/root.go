@@ -6,7 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	
+
+	"rockfin-gov/cmd/aggregator"
 	"rockfin-gov/cmd/database"
 )
 
@@ -48,9 +49,8 @@ func init() {
 	// Add database commands
 	rootCmd.AddCommand(database.NewDatabaseCmd())
 
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// Add aggregator commands
+	rootCmd.AddCommand(aggregator.AggregatorCmd)
 }
 
 // initConfig reads in config file and ENV variables if set.

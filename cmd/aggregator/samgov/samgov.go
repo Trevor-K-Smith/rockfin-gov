@@ -6,7 +6,7 @@ import (
 
 // SamgovCmd represents the samgov command
 var SamgovCmd = &cobra.Command{
-	Use:   "aggregator samgov",
+	Use:   "samgov",
 	Short: "Commands related to sam.gov",
 	Long:  `This command group contains subcommands for interacting with sam.gov`,
 }
